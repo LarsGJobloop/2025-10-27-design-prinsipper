@@ -3,7 +3,7 @@
   static void Main()
   {
     var productRepository = new ProductRepository();
-    var products = productRepository.GetProducts();
+    var productService = new ProductService(productRepository);
 
     // Read user input
     Console.WriteLine("Please enter a Product ID");
@@ -16,15 +16,14 @@
     }
 
     // Search in data store
-    try
-    {
-      Product foundProduct = products[convertedInput];
-      // Present to the caller/user/consumer
-      Console.WriteLine($"Product:\n\tID: {foundProduct.Id}\n\tName: {foundProduct.Name}\n\tPrice: {foundProduct.Price}");
-    }
-    catch (System.Collections.Generic.KeyNotFoundException)
+    Product? foundProduct = productService.GetProduct(convertedInput);
+    if (foundProduct == null)
     {
       Console.WriteLine($"Sorry no product found with ID: {convertedInput}");
+    }
+    else
+    {
+      Console.WriteLine($"Product:\n\tID: {foundProduct.Id}\n\tName: {foundProduct.Name}\n\tPrice: {foundProduct.Price}");
     }
   }
 }
