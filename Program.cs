@@ -10,7 +10,10 @@
       {3, new Product {Id = 3, Name = "Soap", Price = 0.99}},
     };
 
-    Console.WriteLine("Hello");
+    Console.WriteLine("Please enter a Product ID");
+    string? userInput = Console.ReadLine();
+
+    Console.WriteLine($"You wrote: {userInput}");
   }
 }
 
