@@ -10,10 +10,18 @@
       {3, new Product {Id = 3, Name = "Soap", Price = 0.99}},
     };
 
+    // Read user input
     Console.WriteLine("Please enter a Product ID");
     string? userInput = Console.ReadLine();
 
-    Console.WriteLine($"You wrote: {userInput}");
+    // Convert
+    int.TryParse(userInput, out int convertedInput);
+
+    // Search in data store
+    Product foundProduct = products[convertedInput];
+
+    // Present to the caller/user/consumer
+    Console.WriteLine($"Product:\n\tID: {foundProduct.Id}\n\tName: {foundProduct.Name}\n\tPrice: {foundProduct.Price}");
   }
 }
 
