@@ -15,13 +15,22 @@
     string? userInput = Console.ReadLine();
 
     // Convert
-    int.TryParse(userInput, out int convertedInput);
+    if (!int.TryParse(userInput, out int convertedInput))
+    {
+      throw new Exception("ID needs to be a number");
+    }
 
     // Search in data store
-    Product foundProduct = products[convertedInput];
-
-    // Present to the caller/user/consumer
-    Console.WriteLine($"Product:\n\tID: {foundProduct.Id}\n\tName: {foundProduct.Name}\n\tPrice: {foundProduct.Price}");
+    try
+    {
+      Product foundProduct = products[convertedInput];
+      // Present to the caller/user/consumer
+      Console.WriteLine($"Product:\n\tID: {foundProduct.Id}\n\tName: {foundProduct.Name}\n\tPrice: {foundProduct.Price}");
+    }
+    catch (System.Collections.Generic.KeyNotFoundException)
+    {
+      Console.WriteLine($"Sorry no product found with ID: {convertedInput}");
+    }
   }
 }
 
